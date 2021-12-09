@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management/demo/data.dart';
-import 'package:task_management/ui/widgeta/task_item.dart';
+import 'package:task_management/ui/widgets/task_item.dart';
 
 class TasksList extends StatelessWidget {
   @override

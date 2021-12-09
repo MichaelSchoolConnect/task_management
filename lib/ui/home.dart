@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management/demo/data.dart';
-import 'package:task_management/ui/widgeta/task_list.dart';
+import 'package:task_management/ui/widgets/task_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

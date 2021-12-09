@@ -3,61 +3,49 @@ import 'package:task_management/model/task_model.dart';
 
 class TaskDao{
   //
-/*  final dbProvider = DatabaseProvider.dbProvider;
+  final dbProvider = DatabaseProvider.dbProvider;
+  int id = 0;
 
   //Adds new Task records
-  Future<int> createTodo(Task todo) async {
+  Future<int> createTodo(Task task) async {
     final db = await dbProvider.database;
-    var result = db.insert(todoTABLE, todo.toDatabaseJson());
+    var result = db.insert(dbProvider.tableName, task.toJson());
     return result;
     }
 
-  //Get All Task items
-  //Searches if query string was passed
-  Future<List<Task>> getTodos() async {
+  Future<List<Task>> getTodos({List<String>? columns, String? query}) async {
     final db = await dbProvider.database;
 
-    List<Map<String, dynamic>> result;
+    var result;
     if (query != null) {
       if (query.isNotEmpty) {
-        result = await db.query(todoTABLE,
-            columns: columns,
-            where: 'description LIKE ?',
-            whereArgs: ["%$query%"]);
+        result = await db.query(dbProvider.tableName, orderBy: '$id ASC');
       }
     } else {
-      result = await db.query(todoTABLE, columns: columns);
+      result = await db.query(dbProvider.tableName, columns: columns);
     }
 
-    List<Task> todos = result.isNotEmpty ? result.map((item) => Task.fromDatabaseJson(item)).toList() : [];
-    return todos;
+    List<Task> tasks = result.isNotEmpty
+        ? result.map((item) => Task.fromDatabaseJson(item)).toList()
+        : [];
+    return tasks;
   }
 
-  //Update Todo record
-  Future<int> updateTodo(Task todo) async {
+  //Update task record
+  Future<int> updateTodo(Task task) async {
     final db = await dbProvider.database;
 
-    var result = await db.update(todoTABLE, todo.toDatabaseJson(),
-        where: "id = ?", whereArgs: [todo.id]);
+    var result = await db.update('todoTABLE', task.toJson(),
+        where: "id = ?", whereArgs: [task.id]);
 
     return result;
   }
 
-  //Delete Todo records
+  //Delete Task with id records
   Future<int> deleteTodo(int id) async {
     final db = await dbProvider.database;
-    var result = await db.delete(todoTABLE, where: 'id = ?', whereArgs: [id]);
-
+    var result = await db.delete('todoTABLE', where: 'id = ?', whereArgs: [id]);
     return result;
   }
 
-  //We are not going to use this in the demo
-  Future deleteAllTodos() async {
-    final db = await dbProvider.database;
-    var result = await db.delete(
-      todoTABLE,
-    );
-
-    return result;
-  }*/
 }

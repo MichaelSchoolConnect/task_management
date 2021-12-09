@@ -7,6 +7,7 @@ import 'package:task_management/model/task_comment.dart';
 import 'package:task_management/model/task_model.dart';
 
 class DatabaseProvider {
+  static final DatabaseProvider dbProvider = DatabaseProvider();
   // Singleton DatabaseHelper
   static late DatabaseProvider _databaseHelper;
   // Singleton Database
