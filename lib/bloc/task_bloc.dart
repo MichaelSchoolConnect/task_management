@@ -40,6 +40,11 @@ class TaskBloc{
     getTodos();
   }
 
+  getTaskNumber() async{
+    _tasksRepository.getTasksNumber();
+    getTodos();
+  }
+
   dispose() {
     _tasksController.close();
   }

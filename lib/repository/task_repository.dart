@@ -12,4 +12,5 @@ class TaskRepository{
 
   Future deleteTodoById(int id) => taskDao.deleteTodo(id);
 
+  Future getTasksNumber() => taskDao.getTaskAmount();
 }

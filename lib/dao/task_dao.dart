@@ -1,3 +1,4 @@
+import 'package:sqflite/sqflite.dart';
 import 'package:task_management/database/tasks_database.dart';
 import 'package:task_management/model/task_model.dart';
 
@@ -38,6 +39,15 @@ class TaskDao{
     var result = await db.update('todoTABLE', task.toJson(),
         where: "id = ?", whereArgs: [task.id]);
 
+    return result;
+  }
+
+  // Get number of task objects in database
+  Future<int> getTaskAmount() async {
+    final db = await dbProvider.database;
+    List<Map<String, dynamic>> x =
+    await db.rawQuery('SELECT COUNT (*) from tasks');
+    int result = Sqflite.firstIntValue(x);
     return result;
   }
 

@@ -17,7 +17,7 @@ class Dashboard extends StatelessWidget{
     return Scaffold(
       body: Column(
         children: const <Widget>[
-              Text(''),
+              Text('_taskBlocBloc.getTaskNumber()'),
           Text('data')
         ],
       ),
