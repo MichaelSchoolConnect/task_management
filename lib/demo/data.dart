@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:task_management/model/task_model.dart';
 
 class Data extends ChangeNotifier {
+
   List<Task> taskList = [
      Task(
        id: 0,
@@ -31,5 +32,17 @@ class Data extends ChangeNotifier {
   void deleteItemSwipped(int idx) {
     taskList.removeAt(idx);
     notifyListeners();
+  }
+
+  List<Task> allItems(){
+    return taskList;
+  }
+
+  int count(){
+    return taskList.length;
+  }
+
+  int countComments(){
+    return taskList.length + 2;
   }
 }

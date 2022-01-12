@@ -39,7 +39,7 @@ class Task{
   factory Task.fromDatabaseJson(Map<String, dynamic> data) => Task(
     //Factory method will be used to convert JSON objects that
     //are coming from querying the database and converting
-    //it into a Todo object
+    //it into a Task object
 
     id: data['id'],
     date: data['date'],

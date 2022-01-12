@@ -4,6 +4,7 @@ import 'package:task_management/model/task_model.dart';
 import 'package:task_management/repository/task_repository.dart';
 
 class TaskBloc{
+
   //Get instance of the Repository
   final _tasksRepository = TaskRepository();
 

@@ -7,36 +7,40 @@ class TaskItem extends StatelessWidget {
   final String task;
   final DateTime date;
   final int idxToDelete;
+  final GestureDetector gestureDetector;
 
   TaskItem({
     required this.task,
     required this.date,
     required this.idxToDelete,
+    required this.gestureDetector
   });
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      background: Container(
-        color: Colors.red,
-      ),
-      key: Key(task + task),
-      onDismissed: (direction) {
-        Provider.of<Data>(context, listen: false)
-            .deleteItemSwipped(idxToDelete);
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Task removed"),
-          backgroundColor: Colors.red,
-        ));
-      },
-      child: ListTile(
-        title: Text(
-          task,
+    return GestureDetector(
+      child: Dismissible(
+        background: Container(
+          color: Colors.red,
         ),
-        subtitle: Text(
-          (date == null)
-              ? DateFormat.yMMMMEEEEd().format(DateTime.now())
-              : DateFormat.yMMMMEEEEd().format(date),
+        key: Key(task + task),
+        onDismissed: (direction) {
+          Provider.of<Data>(context, listen: false)
+              .deleteItemSwipped(idxToDelete);
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Task removed"),
+            backgroundColor: Colors.red,
+          ));
+        },
+        child: ListTile(
+          title: Text(
+            task,
+          ),
+          subtitle: Text(
+            (date == null)
+                ? DateFormat.yMMMMEEEEd().format(DateTime.now())
+                : DateFormat.yMMMMEEEEd().format(date),
+          ),
         ),
       ),
     );

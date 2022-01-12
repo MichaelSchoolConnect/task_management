@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_management/ui/dashboard.dart';
 import 'package:task_management/ui/home.dart';
+import 'package:task_management/ui/login.dart';
 
 import 'demo/data.dart';
 
@@ -17,8 +19,8 @@ class MyApp extends StatelessWidget {
       create: (context) {
         return Data();
       },
-      child: const MaterialApp(
-        home: HomeScreen(),
+      child:  const MaterialApp(
+        home: Login(),
       ),
     );
   }

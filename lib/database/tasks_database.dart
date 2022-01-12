@@ -6,12 +6,13 @@ import 'package:sqflite/sqflite.dart';
 import 'package:task_management/model/task_comment.dart';
 import 'package:task_management/model/task_model.dart';
 
-class DatabaseProvider {
-  static final DatabaseProvider dbProvider = DatabaseProvider();
+class TaskDatabase {
+
+  static TaskDatabase? dbProvider = TaskDatabase();
   // Singleton DatabaseHelper
-  static late DatabaseProvider _databaseHelper;
+   static TaskDatabase? _databaseHelper;
   // Singleton Database
-  static late Database _database;
+  static Database? _database;
 
   String databaseName = 'tasks_db.db';
   String tableName = 'tasks';
@@ -23,20 +24,14 @@ class DatabaseProvider {
   String time = 'time';
 
   // Named constructor to create instance of DatabaseHelper
-  DatabaseProvider._createInstance();
+  TaskDatabase._createInstance();
 
-  factory DatabaseProvider() {
-    if (_databaseHelper == null) {
-      _databaseHelper = DatabaseProvider
-          ._createInstance(); // This is executed only once, singleton object
-    }
-    return _databaseHelper;
+  factory TaskDatabase() {
+    return  _databaseHelper ??= TaskDatabase._createInstance();
   }
 
-  Future<Database> get database async {
-    if (_database == null) {
-      _database = await initializeDatabase();
-    }
+  Future<Database?> get database async {
+    _database ??= await initializeDatabase();
     return _database;
   }
 
@@ -70,22 +65,22 @@ class DatabaseProvider {
   }
 
   // Fetch Operation: Get all tasks objects from database
-  Future<List<Map<String, dynamic>>> getTaskList() async {
-    Database db = await database;
+  Future<List<Map<String, dynamic>>?> getTaskList() async {
+    Database? db = await database;
 
-    var result = await db.query(tableName, orderBy: '$id ASC');
+    var result = await db?.query(tableName, orderBy: '$id ASC');
     return result;
   }
 
   // Insert Operation: Insert a task object to database
-  Future<int> insert(Task task) async {
+  Future<int?> insertTask(Task task) async {
     // Get a reference to the database.
-    final Database db = await database;
+    final Database? db = await database;
 
     // Insert the Task into the correct table. Also specify the
     // `conflictAlgorithm`. In this case, if the same trip is inserted
     // multiple times, it replaces the previous data.
-    var result = await db.insert(
+    var result = await db?.insert(
       tableName,
       task.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
@@ -95,15 +90,15 @@ class DatabaseProvider {
   }
 
   // Insert Operation: Insert a comment object to database
-  Future<int> insertComment(TaskComment observation) async {
+  Future<int?> insertTaskComment(TaskComment observation) async {
     print('inserted comment');
     // Get a reference to the database.
-    final Database db = await database;
+    final Database? db = await database;
 
     // Insert the comment into the correct table. Also specify the
     // `conflictAlgorithm`. In this case, if the same observation is inserted
     // multiple times, it replaces the previous data.
-    var result = await db.insert(
+    var result = await db?.insert(
       taskComments,
       observation.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
@@ -113,12 +108,12 @@ class DatabaseProvider {
   }
 
   // Update Operation: Update a task object and save it to database
-  Future<int> updateTask(Task task) async {
+  Future<int?> updateTask(Task task) async {
     // Get a reference to the database.
     final db = await database;
 
     // Update the given Task.
-    var result = await db.update(
+    var result = await db?.update(
       tableName,
       task.toMap(),
       // Ensure that the Task has a matching id.
@@ -130,13 +125,13 @@ class DatabaseProvider {
     return result;
   }
 
-  Future<int> updateComment(TaskComment taskComment) async {
+  Future<int?> updateTaskComment(TaskComment taskComment) async {
     print('updated comment');
     // Get a reference to the database.
     final db = await database;
 
     // Update the given Comment.
-    var result = await db.update(
+    var result = await db?.update(
       taskComments,
       taskComment.toMap(),
       // Ensure that the comment has a matching id.
@@ -149,44 +144,44 @@ class DatabaseProvider {
   }
 
   // Delete Operation: Delete a task object from database
-  Future<int> delete(int id) async {
+  Future<int> deleteTask(int id) async {
     var db = await database;
-    int result = await db.rawDelete('DELETE FROM $tableName WHERE id = $id');
+    int result = await db!.rawDelete('DELETE FROM $tableName WHERE id = $id');
     return result;
   }
 
   // Delete Operation: Delete a comment object from database
-  Future<int> deleteComment(int id) async {
+  Future<int> deleteTaskComment(int id) async {
     var db = await database;
-    int result = await db.rawDelete('DELETE FROM $taskComments WHERE id = $id');
+    int result = await db!.rawDelete('DELETE FROM $taskComments WHERE id = $id');
     return result;
   }
 
   // Get number of task objects in database
-  Future<int> getTaskAmount() async {
-    Database db = await database;
+  Future<int?> getTaskAmount() async {
+    Database? db = await database;
     List<Map<String, dynamic>> x =
-    await db.rawQuery('SELECT COUNT (*) from $tableName');
-    int result = Sqflite.firstIntValue(x);
+    await db!.rawQuery('SELECT COUNT (*) from $tableName');
+    int? result = Sqflite.firstIntValue(x);
     return result;
   }
 
   // Get number of taskComment objects in database
-  Future<int> getCommentsAmount() async {
-    Database db = await database;
+  Future<int?> getCommentsAmount() async {
+    Database? db = await database;
     List<Map<String, dynamic>> x =
-    await db.rawQuery('SELECT COUNT (*) from $taskComments');
-    int result = Sqflite.firstIntValue(x);
+    await db!.rawQuery('SELECT COUNT (*) from $taskComments');
+    int? result = Sqflite.firstIntValue(x);
     return result;
   }
 
 
   Future<List<TaskComment>> getComments() async {
     // Get a reference to the database.
-    final Database db = await database;
+    final Database? db = await database;
 
     // Query the table for all The Comments.
-    final List<Map<String, dynamic>> maps = await db.query(taskComments);
+    final List<Map<String, dynamic>> maps = await db!.query(taskComments);
 
     // Convert the List<Map<String, dynamic> into a List<TaskComment>.
     return List.generate(maps.length, (i) {
@@ -198,10 +193,10 @@ class DatabaseProvider {
 
   Future<List<Task>> getTasks() async {
     // Get a reference to the database.
-    final Database db = await database;
+    final Database? db = await database;
 
 // Query the table for all The Dogs.
-    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    final List<Map<String, dynamic>> maps = await db!.query(tableName);
 
     // Convert the List<Map<String, dynamic> into a List<Dog>.
     return List.generate(maps.length, (i) {
