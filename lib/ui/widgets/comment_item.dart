@@ -7,8 +7,8 @@ class CommentItem extends StatelessWidget {
   final String comment;
 
   CommentItem({
-    required this.id,
-    required this.comment,
+    this.id,
+    this.comment,
   });
 
   @override
@@ -19,12 +19,11 @@ class CommentItem extends StatelessWidget {
       ),
       key: Key(comment + comment),
       onDismissed: (direction) {
-        Provider.of<CommentsDemo>(context, listen: false)
-            .deleteItemSwipped(id);
-        Scaffold.of(context).showSnackBar(const SnackBar(
+        Provider.of<CommentsDemo>(context, listen: false).deleteItemSwipped(id);
+        /* Scaffold.of(context).showSnackBar(const SnackBar(
           content: Text("Task removed"),
           backgroundColor: Colors.red,
-        ));
+        ));*/
       },
       child: ListTile(
         title: Text(

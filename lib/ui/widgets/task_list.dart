@@ -7,13 +7,12 @@ import 'package:task_management/ui/widgets/task_item.dart';
 import 'comments_list.dart';
 
 class TasksList extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Consumer<Data>(
-          builder: (BuildContext context, Data provider, Widget? child) {
+          builder: (BuildContext context, Data provider, Widget child) {
             return ListView.builder(
               itemCount: provider.taskList.length,
               itemBuilder: (context, index) {
@@ -22,16 +21,18 @@ class TasksList extends StatelessWidget {
                   date: listItem.date,
                   task: listItem.taskName,
                   idxToDelete: index,
-                  gestureDetector: GestureDetector(onTap: (){
-                    if (kDebugMode) {
-                      print('onTap');
-                    }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const CommentsList()),
-                    );
-                  }
-                 ,),
+                  gestureDetector: GestureDetector(
+                    onTap: () {
+                      if (kDebugMode) {
+                        print('onTap');
+                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CommentsList()),
+                      );
+                    },
+                  ),
                 );
               },
             );
@@ -44,12 +45,11 @@ class TasksList extends StatelessWidget {
           Icons.add,
           size: 24.0,
         ),
-        onPressed: (){
+        onPressed: () {
           var d = Data();
           d.addToList('New Task', DateTime.now(), true);
         },
       ),
     );
   }
-
 }

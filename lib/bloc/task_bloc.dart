@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:task_management/model/task_model.dart';
 import 'package:task_management/repository/task_repository.dart';
 
-class TaskBloc{
-
+class TaskBloc {
   //Get instance of the Repository
   final _tasksRepository = TaskRepository();
 
@@ -20,7 +19,7 @@ class TaskBloc{
     getTodos(query: '');
   }
 
-  getTodos({ String? query}) async {
+  getTodos({String query}) async {
     //sink is a way of adding data reactively to the stream
     //by registering a new event
     _tasksController.sink.add(await _tasksRepository.getAllTodos(query: ''));
@@ -41,7 +40,7 @@ class TaskBloc{
     getTodos();
   }
 
-  getTaskNumber() async{
+  getTaskNumber() async {
     _tasksRepository.getTasksNumber();
     getTodos();
   }

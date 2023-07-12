@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_management/ui/dashboard.dart';
-import 'package:task_management/ui/home.dart';
 import 'package:task_management/ui/login.dart';
 
 import 'demo/data.dart';
@@ -11,7 +9,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
       create: (context) {
         return Data();
       },
-      child:  const MaterialApp(
+      child: const MaterialApp(
         home: Login(),
       ),
     );

@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:task_management/ui/dashboard.dart';
 
-class Login extends StatefulWidget{
-  const Login({Key? key}) : super(key: key);
-
+class Login extends StatefulWidget {
+  const Login({Key key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -64,7 +62,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     //forgot password screen
                   },
                   child: const Text('Forgot Password'),
@@ -84,7 +82,6 @@ class _LoginState extends State<Login> {
                           context,
                           MaterialPageRoute(builder: (context) => Dashboard()),
                         );
-
                       },
                     )),
                 Row(

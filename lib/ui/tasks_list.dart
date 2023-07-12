@@ -1,17 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task_management/bloc/task_bloc.dart';
-import 'package:task_management/ui/widgets/task_item.dart';
 
-class AllTasks extends StatelessWidget{
-
-   AllTasks({Key? key}) : super(key: key);
+class AllTasks extends StatelessWidget {
+  AllTasks({Key key}) : super(key: key);
 
   final TaskBloc _taskBloc = TaskBloc();
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(),
     );
@@ -31,5 +27,4 @@ class AllTasks extends StatelessWidget{
       },
     );
   }*/
-
 }

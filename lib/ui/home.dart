@@ -4,7 +4,7 @@ import 'package:task_management/demo/data.dart';
 import 'package:task_management/ui/widgets/task_list.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,8 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 25),
+            padding:
+                const EdgeInsets.only(top: 80, left: 30, right: 30, bottom: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -30,9 +31,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "All Tasks"
-                ),
+                const Text("All Tasks"),
                 Text(
                   "${Provider.of<Data>(context).taskList.length} tasks",
                 ),

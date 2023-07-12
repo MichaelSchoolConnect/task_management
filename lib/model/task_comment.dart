@@ -1,11 +1,11 @@
-class TaskComment{
+class TaskComment {
   // For deletion
   int id;
 
   String comment;
 
   // Constructor
-  TaskComment({required this.id, required this.comment});
+  TaskComment({this.id, this.comment});
 
   Map<String, dynamic> toMap() {
     return {
@@ -14,13 +14,8 @@ class TaskComment{
     };
   }
 
-  factory TaskComment.fromJson(Map<String, dynamic> data) => TaskComment(
-      id: data["id"],
-      comment: data["comment"]
-  );
+  factory TaskComment.fromJson(Map<String, dynamic> data) =>
+      TaskComment(id: data["id"], comment: data["comment"]);
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "comment": comment
-  };
+  Map<String, dynamic> toJson() => {"id": id, "comment": comment};
 }

@@ -1,14 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:task_management/bloc/task_bloc.dart';
-import 'package:task_management/database/tasks_database.dart';
 import 'package:task_management/demo/data.dart';
 import 'package:task_management/ui/widgets/comments_list.dart';
 import 'package:task_management/ui/widgets/task_list.dart';
 
-class Dashboard extends StatelessWidget{
-  Dashboard({Key? key}) : super(key: key);
+class Dashboard extends StatelessWidget {
+  Dashboard({Key key}) : super(key: key);
 
   //We load our Task BLoC that is used to get
   //the stream of Task for StreamBuilder
@@ -17,7 +14,6 @@ class Dashboard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-
     var _taskNumber = _taskBlocBloc.getTaskNumber();
     var _totalComments = _taskBlocBloc.getTaskNumber();
     var data = Data();
@@ -35,7 +31,7 @@ class Dashboard extends StatelessWidget{
                 child: Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
-                    child:  Text(
+                    child: Text(
                       allTasks.toString() + " Tasks",
                       style: const TextStyle(
                           color: Colors.blue,
@@ -43,14 +39,16 @@ class Dashboard extends StatelessWidget{
                           fontSize: 30),
                     )),
               ),
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => TasksList()),
                 );
               },
             ),
-            const SizedBox(height: 25.0,),
+            const SizedBox(
+              height: 25.0,
+            ),
             InkWell(
               child: Card(
                 child: Container(
@@ -64,7 +62,7 @@ class Dashboard extends StatelessWidget{
                           fontSize: 30),
                     )),
               ),
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const CommentsList()),
